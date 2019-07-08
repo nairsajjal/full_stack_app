@@ -1,5 +1,5 @@
 import React from 'react';
-//import Table from './Table';
+import Table from './Table';
 class Form extends React.Component{
 state={
     invoiceId: '',
@@ -67,7 +67,7 @@ render(){
 
             </div>
         <div className="col-12">
-            
+            <Table />
         </div>
 
             <div className="col-6 offset-md-6">
