@@ -1,5 +1,6 @@
 import React from 'react';
-import Table from './Table';
+import axios from 'axios';
+import {saveAs} from 'file-saver';
 class Form extends React.Component{
 state={
     invoiceId: '',
@@ -23,9 +24,10 @@ change = e => {
         [e.target.name]: e.target.value
     });
 }
-onSubmit= () =>{
-    console.log(this.state);
+createAndDownloadPdf = () => {
+    axios.post('/create-pdf', this.state);
 }
+
 render(){
     return (
         <div className="container" style={{marginTop: '10px', marginLeft: '30px', padding: '20px 0px 20px 20px'}}>
@@ -67,7 +69,30 @@ render(){
 
             </div>
         <div className="col-12">
-            <Table />
+        <div>
+                <table className="table table-striped table-bordered table-hover">
+                    <thead className="thead-dark">
+                        <tr>
+                            <th scope="col">Item-Id</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Rate</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td><input type="number" className="form-control" name="itemsId" placeholder="Item-Id" value = {this.state.itemNumber} onChange={e => this.change(e)} /></td>
+                        <td><input type="text" className="form-control" name="type" placeholder="type" value = {this.state.type} onChange={e => this.change(e)}/></td>
+                        <td><input type="number" className="form-control" name="quantity" placeholder="quantity" value = {this.state.quantity} onChange={e => this.change(e)}/></td>
+                        <td><input type="number" className="form-control" name="rate" placeholder="rate" value = {this.state.rate} onChange={e => this.change(e)}/></td>
+                        <td><input type="number" className="form-control" name="amount" placeholder="amount" value = {this.state.amount} onChange={e => this.change(e)}/></td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+                
+            </div>
         </div>
 
             <div className="col-6 offset-md-6">
@@ -88,10 +113,11 @@ render(){
             <label>Total</label>
             <input type="number" name="total" className="form-control" placeholder="total" value = {this.state.total} onChange={e => this.change(e)}/>
           </div>
+          <div className="form-group">
+          <button className="btn btn-primary" onClick={()=> this.createAndDownloadPdf()}><i className="fa fa-database" />Create Doc</button>
         </div>
-        <div className="form-group">
-          <button className="btn btn-info" onClick={()=> this.onSubmit()}><i className="fa fa-database" />Submit</button>
         </div>
+       
 
             
             </div>

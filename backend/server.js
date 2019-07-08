@@ -3,7 +3,8 @@ require('./models/db');
 const mongoose = require("mongoose");
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const pdf = require('html-pdf');
+const cors = require('cors');
 const invoiceController = require('./controllers/invoiceController');
 
 
@@ -13,7 +14,7 @@ const app= express();
 const router = express.Router();
 
 
-
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
