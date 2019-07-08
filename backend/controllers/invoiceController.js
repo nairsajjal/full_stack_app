@@ -45,7 +45,7 @@ function insertRecord(req, res){
 
             }
             else{
-                console.log('Error during record insertion: ' +err);
+                console.log('Error during record insertion, please refer to the error logs: ' +err);
             }
             
         }       
@@ -60,7 +60,7 @@ router.get('/list',(req,res)=>{
             })
         }
         else{
-            console.log("error in retrieving the records"+ err);
+            console.log("error in the actual retrieving of the records please check the error code"+ err);
         }
     });
     
