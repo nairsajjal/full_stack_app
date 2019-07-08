@@ -22,10 +22,19 @@ state={
 change = e => {
     this.setState({
         [e.target.name]: e.target.value
+
     });
 }
 createAndDownloadPdf = () => {
-    axios.post('/create-pdf', this.state);
+    axios.post('/create-pdf', this.state)
+    .then(()=>axios.get('fetch-pdf', {responseType: 'blob'})
+    .then((res=>{
+      const pdfblob = new Blob([res.data],{type: 'application/pdf'})
+    
+      saveAs(pdfblob, 'invoice.pdf');
+    
+    }))
+    )
 }
 
 render(){
@@ -82,7 +91,7 @@ render(){
                     </thead>
                     <tbody>
                         <tr>
-                        <td><input type="number" className="form-control" name="itemsId" placeholder="Item-Id" value = {this.state.itemNumber} onChange={e => this.change(e)} /></td>
+                        <td><input type="number" className="form-control" name="itemNumber" placeholder="Item-Id" value = {this.state.itemNumber} onChange={e => this.change(e)} /></td>
                         <td><input type="text" className="form-control" name="type" placeholder="type" value = {this.state.type} onChange={e => this.change(e)}/></td>
                         <td><input type="number" className="form-control" name="quantity" placeholder="quantity" value = {this.state.quantity} onChange={e => this.change(e)}/></td>
                         <td><input type="number" className="form-control" name="rate" placeholder="rate" value = {this.state.rate} onChange={e => this.change(e)}/></td>
