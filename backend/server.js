@@ -9,10 +9,9 @@ const invoiceController = require('./controllers/invoiceController');
 const pdfTemplate = require('./documents');
 
 
-const API_PORT = 3001;
+const API_PORT = 5000;
 const app= express();
 const router = express.Router();
-
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -30,7 +29,7 @@ app.post('/create-pdf',(req,res)=> {
 
 //GET request to send the pdf
 app.get('/fetch-pdf', (req,res)=>{
-    res.sendFile(`${__dirname}/result.pdf`);
+    res.sendFile(`${__dirname}/invoice.pdf`);
 })
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
 

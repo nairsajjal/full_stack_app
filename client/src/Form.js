@@ -25,7 +25,8 @@ change = e => {
 
     });
 }
-createAndDownloadPdf = () => {
+createAndDownloadPdf = e => {
+  e.preventDefault();
     axios.post('/create-pdf', this.state)
     .then(()=>axios.get('fetch-pdf', {responseType: 'blob'})
     .then((res=>{
@@ -40,7 +41,7 @@ createAndDownloadPdf = () => {
 render(){
     return (
         <div className="container" style={{marginTop: '10px', marginLeft: '30px', padding: '20px 0px 20px 20px'}}>
-        <form>
+        
             <div className="row">
             <div className="col-md-6 col-lg-6">
 
@@ -123,7 +124,7 @@ render(){
             <input type="number" name="total" className="form-control" placeholder="total" value = {this.state.total} onChange={e => this.change(e)}/>
           </div>
           <div className="form-group">
-          <button className="btn btn-primary" onClick={()=> this.createAndDownloadPdf()}><i className="fa fa-database" />Create Doc</button>
+          <button className="btn btn-primary" onClick={e=> this.createAndDownloadPdf(e)}><i className="fa fa-database" />Create Doc</button>
         </div>
         </div>
        
@@ -133,7 +134,7 @@ render(){
        
        
        
-        </form>
+      
         </div>
     );
 }
