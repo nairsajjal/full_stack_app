@@ -147,55 +147,61 @@ module.exports = ({invoiceId,billFrom,billTo,date,dueDate,subTotal,itemNumber,ty
     <body>
       <header class="clearfix">
         <div id="logo">
-          <img src="logo.png">
+          <img src="./CT_logo.png">
         </div>
-        <h1>INVOICE 3-2-1</h1>
+        <h1>INVOICE# ${invoiceId}</h1>
         <div id="company" class="clearfix">
-          <div>Company Name</div>
-          <div>455 Foggy Heights,<br /> AZ 85004, US</div>
-          <div>(602) 519-0450</div>
-          <div><a href="mailto:company@example.com">company@example.com</a></div>
+          <div>CT Solutions</div>
+            <div>${billFrom}<br /></div>
+          
         </div>
         <div id="project">
           <div><span>PROJECT</span> Website development</div>
-          <div><span>CLIENT</span> John Doe</div>
-          <div><span>ADDRESS</span> 796 Silver Harbour, TX 79273, US</div>
-          <div><span>EMAIL</span> <a href="mailto:john@example.com">john@example.com</a></div>
-          <div><span>DATE</span> August 17, 2015</div>
-          <div><span>DUE DATE</span> September 17, 2015</div>
+          <div><span>CLIENT</span> ${billTo}</div>
+          
+          <div><span>DATE</span>${date}</div>
+          <div><span>DUE</span>${dueDate}</div>
         </div>
       </header>
       <main>
         <table>
           <thead>
             <tr>
-              <th class="service">SERVICE</th>
-              <th class="desc">DESCRIPTION</th>
-              <th>PRICE</th>
-              <th>QTY</th>
-              <th>TOTAL</th>
+              <th class="service">Item-ID</th>
+              <th class="desc">Type</th>
+              <th>Quantity</th>
+              <th>Rate</th>
+              <th>Amount</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="service">Design</td>
-              <td class="desc">Creating a recognizable design solution based on the company's existing visual identity</td>
-              <td class="unit">$40.00</td>
-              <td class="qty">26</td>
-              <td class="total">$1,040.00</td>
+              <td class="service">${itemNumber}</td>
+              <td class="desc">${type}</td>
+              <td class="unit">${quantity}</td>
+              <td class="qty">${rate}</td>
+              <td class="total">${amount}</td>
             </tr>
             
             <tr>
               <td colspan="4">SUBTOTAL</td>
-              <td class="total">$5,200.00</td>
+              <td class="total">${subTotal}</td>
             </tr>
             <tr>
-              <td colspan="4">TAX 25%</td>
-              <td class="total">$1,300.00</td>
+              <td colspan="4">TAX %</td>
+              <td class="total">${tax}</td>
+            </tr>
+            <tr>
+              <td colspan="4">Discount %</td>
+              <td class="total">${discounts}</td>
+            </tr>
+            <tr>
+              <td colspan="4">Shipping</td>
+              <td class="total">${shipping}</td>
             </tr>
             <tr>
               <td colspan="4" class="grand total">GRAND TOTAL</td>
-              <td class="grand total">$6,500.00</td>
+              <td class="grand total">${total}</td>
             </tr>
           </tbody>
         </table>
