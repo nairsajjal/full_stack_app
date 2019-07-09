@@ -1,121 +1,208 @@
+
+
 module.exports = ({invoiceId,billFrom,billTo,date,dueDate,subTotal,itemNumber,type,quantity,rate,amount,discounts,tax,shipping,total,}) => {
 
-    return ` <!doctype html>
-    <html>
+    return `<html lang="en">
     <head>
-        <meta charset="utf-8">
-        <title>A simple, clean, and responsive HTML invoice template</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <style>
-        body{
-            max-width: 800px;
-            margin: auto;
-            padding: 30px;
-            border: 1px solid #eee;
-            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
-            font-size: 16px;
-            line-height: 24px;
-            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-            color: #555;
-        }
-        
-        
-        
-        /** RTL **/
-        .rtl {
-            direction: rtl;
-            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-        }
-        
-        .rtl table {
-            text-align: right;
-        }
-        
-        .rtl table tr td:nth-child(2) {
-            text-align: left;
-        }
-        </style>
-    </head>
-    
-    <body>
-    <div class="container">
-    <div class="row">
-    <div class="col-4">
-      <img src="CT_logo.png" style="width:80%; max-width:120px;">
-       </div>
-    <div class="col-4 offset-4">
-                                <p style="padding-top:10px;">
-                                    Invoice #: 123<br>
-                                    Created: January 1, 2015<br>
-                                    Due: February 1, 2015
-                             </p>
+      <meta charset="utf-8">
+      <title>Example 1</title>
+      <link rel="stylesheet" href="style.css" media="all" />
+      <style>.clearfix:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
       
-      </div>
-    <div class="col-6" style="padding-top:10px;">
-    
-                       <p>
-                                    Sparksuite, Inc.<br>
-                                    12345 Sunny Road<br>
-                                    Sunnyville, CA 12345
-                               </p>
-    </div>     
-        
-    <div class="col-6">        
-                                <p style="padding-left:122px;">
-                                    Acme Corp.<br>
-                                    John Doe<br>
-                                    john@example.com
-                                </p>
-     </div>  
-     </div>
-    
-    
-        
-               </div>
-                <table class="table table-striped table-bordered">
-                <thead class="thead-dark">
-            <tr>                
-            <th>
-                        Item-Id
-                    </th>
-                    <th>
-                        Type
-                    </th>
-            <th>
-                        Quantity
-                    </th>
-                    <th>
-                        Rate
-                    </th>
-            <th>
-                        Amount
-                    </th>
+      a {
+        color: #5D6975;
+        text-decoration: underline;
+      }
+      
+      body {
+        max-width: 600px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+      }
+      
+      header {
+        padding: 10px 0;
+        margin-bottom: 30px;
+      }
+      
+      #logo {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      
+      #logo img {
+        width: 90px;
+      }
+      
+      h1 {
+        border-top: 1px solid  #5D6975;
+        border-bottom: 1px solid  #5D6975;
+        color: #5D6975;
+        font-size: 2.4em;
+        line-height: 1.4em;
+        font-weight: normal;
+        text-align: center;
+        margin: 0 0 20px 0;
+        background: url(dimension.png);
+      }
+      
+      #project {
+        float: left;
+      }
+      
+      #project span {
+        color: #5D6975;
+        text-align: right;
+        width: 52px;
+        margin-right: 10px;
+        display: inline-block;
+        font-size: 0.8em;
+      }
+      
+      #company {
+        float: right;
+        text-align: right;
+      }
+      
+      #project div,
+      #company div {
+        white-space: nowrap;        
+      }
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin-bottom: 20px;
+      }
+      
+      table tr:nth-child(2n-1) td {
+        background: #F5F5F5;
+      }
+      
+      table th,
+      table td {
+        text-align: center;
+      }
+      
+      table th {
+        padding: 5px 20px;
+        color: #5D6975;
+        border-bottom: 1px solid #C1CED9;
+        white-space: nowrap;        
+        font-weight: normal;
+      }
+      
+      table .service,
+      table .desc {
+        text-align: left;
+      }
+      
+      table td {
+        padding: 20px;
+        text-align: right;
+      }
+      
+      table td.service,
+      table td.desc {
+        vertical-align: top;
+      }
+      
+      table td.unit,
+      table td.qty,
+      table td.total {
+        font-size: 1.2em;
+      }
+      
+      table td.grand {
+        border-top: 1px solid #5D6975;;
+      }
+      
+      #notices .notice {
+        color: #5D6975;
+        font-size: 1.2em;
+      }
+      
+      footer {
+        color: #5D6975;
+        width: 100%;
+        height: 30px;
+        position: absolute;
+        bottom: 0;
+        border-top: 1px solid #C1CED9;
+        padding: 8px 0;
+        text-align: center;
+      }</style>
+    </head>
+    <body>
+      <header class="clearfix">
+        <div id="logo">
+          <img src="logo.png">
+        </div>
+        <h1>INVOICE 3-2-1</h1>
+        <div id="company" class="clearfix">
+          <div>Company Name</div>
+          <div>455 Foggy Heights,<br /> AZ 85004, US</div>
+          <div>(602) 519-0450</div>
+          <div><a href="mailto:company@example.com">company@example.com</a></div>
+        </div>
+        <div id="project">
+          <div><span>PROJECT</span> Website development</div>
+          <div><span>CLIENT</span> John Doe</div>
+          <div><span>ADDRESS</span> 796 Silver Harbour, TX 79273, US</div>
+          <div><span>EMAIL</span> <a href="mailto:john@example.com">john@example.com</a></div>
+          <div><span>DATE</span> August 17, 2015</div>
+          <div><span>DUE DATE</span> September 17, 2015</div>
+        </div>
+      </header>
+      <main>
+        <table>
+          <thead>
+            <tr>
+              <th class="service">SERVICE</th>
+              <th class="desc">DESCRIPTION</th>
+              <th>PRICE</th>
+              <th>QTY</th>
+              <th>TOTAL</th>
             </tr>
-                </thead>
-                <tbody>
-    
-                <tr>
-                   <td>101</td>
-               <td>Games</td>
-               <td>10</td>
-            <td>100</td>
-            <td>1000</td>
-                </tr>
-             
-        </tbody>
-            </table>
-        <div class="container">
-        <div class="row">
-        <div class="col-6 offset-md-6">
-        <p>Discounts:</p>
-        <p>Tax:</p>
-        <p>Shipping:</p>
-        <p>Gross Total:</p>
-        </div>	
-        </div>	
-        </div>
-        </div>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="service">Design</td>
+              <td class="desc">Creating a recognizable design solution based on the company's existing visual identity</td>
+              <td class="unit">$40.00</td>
+              <td class="qty">26</td>
+              <td class="total">$1,040.00</td>
+            </tr>
+            
+            <tr>
+              <td colspan="4">SUBTOTAL</td>
+              <td class="total">$5,200.00</td>
+            </tr>
+            <tr>
+              <td colspan="4">TAX 25%</td>
+              <td class="total">$1,300.00</td>
+            </tr>
+            <tr>
+              <td colspan="4" class="grand total">GRAND TOTAL</td>
+              <td class="grand total">$6,500.00</td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </main>
+      
     </body>
-    </html>
-            `
+  </html>`
+            
 }
