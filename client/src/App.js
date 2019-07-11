@@ -1,7 +1,7 @@
 import React from 'react';
 import Form from './Form';
 function PageHeader(){
-  return <h1 className="page-header" style={{marginLeft: '50px', marginTop: '50px'}}>INVOICES GENERATOR</h1>
+  return <h1 className="page-header" style={{marginLeft: '124px', marginTop: '50px'}}>INVOICE GENERATOR</h1>
 }
 
 
