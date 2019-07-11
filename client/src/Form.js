@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {saveAs} from 'file-saver';
+
 class Form extends React.Component{
 state={
     invoiceId: '',
@@ -11,13 +12,16 @@ state={
     subTotal: '',
     itemNumber: '',
     type: '',
-    quantity: '',
+    quantity:'',
     rate: '',
     amount: '',
     discounts: '',
     tax: '',
     shipping: '',
     total: '',
+    
+
+   
 }
 change = e => {
     this.setState({
@@ -25,6 +29,40 @@ change = e => {
 
     });
 }
+
+amountUpdate = e=>{
+  this.change(e);
+  this.setState({amount:(e.target.value)*(this.state.quantity)})
+  this.setState({subTotal:(e.target.value)*(this.state.quantity)})
+  this.setState({total:(e.target.value)*(this.state.quantity)})
+  this.newchange(e);
+}
+newchange = e=> {
+  this.change(e)
+  
+}
+addDiscounts = e=> {
+  this.change(e);
+  var newTotal = ( ((100*this.state.total)-(this.state.discounts*this.state.total))/100 );
+
+  this.setState({total:newTotal});
+
+}
+addTax = e=> {
+  this.change(e);
+  var total = this.state.total;
+  this.setState({total:  ( ((100*total)+(this.state.tax*total))/100 )})
+}
+addShipping = e =>{
+this.change(e);
+var oldtotal = this.state.total;
+
+
+this.setState({total:(oldtotal*1) + (this.state.shipping*1)});
+
+}
+
+
 createAndDownloadPdf = e => {
   e.preventDefault();
     axios.post('/create-pdf', this.state)
@@ -38,9 +76,23 @@ createAndDownloadPdf = e => {
     )
 }
 
+addRow = e =>{
+  e.preventDefault();
+  var x=document.getElementById('tbody').insertRow(0);
+  var id=x.insertCell(0);
+  var type=x.insertCell(1);
+  var quantity=x.insertCell(2);
+  var rate=x.insertCell(3);
+  var amount=x.insertCell(4);
+  id.innerHTML = `<input type="number" class="form-control" name="itemNumber" placeholder="Item-Id" />`;
+  type.innerHTML = `<input type="number" class="form-control" name="type" placeholder="type" />`;
+  quantity.innerHTML = `<input type="number" class="form-control" name="quantity" placeholder="quantity"/>`;
+  rate.innerHTML = `<input type="number" class="form-control" name="rate" placeholder="rate" />`;
+  amount.innerHTML = `<input type="number" class="form-control" name="amount" placeholder="amount" />`;
+}
 render(){
     return (
-        <div className="container" style={{marginTop: '10px', marginLeft: '30px', padding: '20px 0px 20px 20px'}}>
+        <div className="container" style={{marginTop: '10px', padding: '20px 0px 20px 20px'}}>
         
             <div className="row">
             <div className="col-md-6 col-lg-6">
@@ -62,9 +114,9 @@ render(){
             </div>
         <div className="col-md-6 col-lg-6">
             <div className="form-group">
-              <label>Date</label>
-                <input type="date" className="form-control" name="date" placeholder="Date"
-                value = {this.state.date} onChange={e => this.change(e)} />
+              <label>Invoice Creation Date</label>
+                <input type="date" className="form-control" name="date" 
+                value = {this.state.date} id="today" onChange={e => this.change(e)} />
             </div>
         <div className="form-group">
           <label>Due-Date</label>
@@ -80,7 +132,7 @@ render(){
             </div>
         <div className="col-12">
         <div>
-                <table className="table table-striped table-bordered table-hover">
+        <table className="table table-striped table-bordered table-hover">
                     <thead className="thead-dark">
                         <tr>
                             <th scope="col">Item-Id</th>
@@ -90,41 +142,40 @@ render(){
                             <th scope="col">Amount</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         <tr>
                         <td><input type="number" className="form-control" name="itemNumber" placeholder="Item-Id" value = {this.state.itemNumber} onChange={e => this.change(e)} /></td>
                         <td><input type="text" className="form-control" name="type" placeholder="type" value = {this.state.type} onChange={e => this.change(e)}/></td>
                         <td><input type="number" className="form-control" name="quantity" placeholder="quantity" value = {this.state.quantity} onChange={e => this.change(e)}/></td>
-                        <td><input type="number" className="form-control" name="rate" placeholder="rate" value = {this.state.rate} onChange={e => this.change(e)}/></td>
-                        <td><input type="number" className="form-control" name="amount" placeholder="amount" value = {this.state.amount} onChange={e => this.change(e)}/></td>
+                        <td><input type="number" className="form-control" name="rate" placeholder="rate" value = {this.state.rate} onChange={e => this.amountUpdate(e)}/></td>
+                        <td><input type="number" className="form-control" name="amount" placeholder="amount" value = {this.state.amount} onChange={e => this.newchange(e)}/></td>
                         </tr>
                     </tbody>
-                    
+                    <button className="btn btn-primary" onClick={e => this.addRow(e)} ><i className="fa fa-add" />Add Items</button>
                 </table>
-                
             </div>
         </div>
 
             <div className="col-6 offset-md-6">
           <div className="form-group">
-            <label>Discounts</label>
-            <input type="number" className="form-control" name="discounts" placeholder="discounts" 
-                value = {this.state.discounts} onChange={e => this.change(e)}/>
+            <label>Discount %</label>
+            <input type="number" className="form-control" name="Discount" placeholder="discounts" 
+                value = {this.state.discounts} onChange={e => this.addDiscounts(e)}/>
           </div>
           <div className="form-group">
-            <label>Tax</label>
-            <input type="number" className="form-control" name="tax" placeholder="tax" value = {this.state.tax} onChange={e => this.change(e)}/>
+            <label>Tax %</label>
+            <input type="number" className="form-control" name="tax" placeholder="Tax " value = {this.state.tax}   onChange={e => this.change(e)} onBlur={e => this.addTax(e)}/>
           </div>
           <div className="form-group">
             <label>Shipping</label>
-            <input type="number" className="form-control" name="shipping" placeholder="shipping" value = {this.state.shipping} onChange={e => this.change(e)}/>
+            <input type="number" className="form-control" name="shipping" placeholder="shipping" value = {this.state.shipping} onChange={e => this.change(e)} onBlur={e => this.addShipping(e)}/>
           </div>
           <div className="form-group">
             <label>Total</label>
             <input type="number" name="total" className="form-control" placeholder="total" value = {this.state.total} onChange={e => this.change(e)}/>
           </div>
           <div className="form-group">
-          <button className="btn btn-primary" onClick={e=> this.createAndDownloadPdf(e)}><i className="fa fa-database" />Create Doc</button>
+          <button className="btn btn-primary" onClick={e=> this.createAndDownloadPdf(e)}><i className="fa fa-database" />Generate Invoice</button>
         </div>
         </div>
        
