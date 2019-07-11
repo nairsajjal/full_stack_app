@@ -12,7 +12,7 @@ state={
     subTotal: '',
     itemNumber: '',
     type: '',
-    quantity: '',
+    quantity:'',
     rate: '',
     amount: '',
     discounts: '',
@@ -83,7 +83,7 @@ addRow = e =>{
   var amount=x.insertCell(4);
   id.innerHTML = `<input type="number" class="form-control" name="itemNumber" placeholder="Item-Id" />`;
   type.innerHTML = `<input type="number" class="form-control" name="type" placeholder="type" />`;
-  quantity.innerHTML = `<input type="number" class="form-control" name="quantity" placeholder="quantity" />`;
+  quantity.innerHTML = `<input type="number" class="form-control" name="quantity" placeholder="quantity"/>`;
   rate.innerHTML = `<input type="number" class="form-control" name="rate" placeholder="rate" />`;
   amount.innerHTML = `<input type="number" class="form-control" name="amount" placeholder="amount" />`;
 }
