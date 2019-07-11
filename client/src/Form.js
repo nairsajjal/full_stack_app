@@ -32,6 +32,7 @@ amountUpdate = e=>{
   this.change(e);
   this.setState({amount:(e.target.value)*(this.state.quantity)})
   this.setState({subTotal:(e.target.value)*(this.state.quantity)})
+  this.setState({total:(e.target.value)*(this.state.quantity)})
   this.newchange(e);
 }
 newchange = e=> {
@@ -40,7 +41,7 @@ newchange = e=> {
 }
 addDiscounts = e=> {
   this.change(e);
-  var newTotal = ( ((100*this.state.subTotal)-(this.state.discounts*this.state.subTotal))/100 );
+  var newTotal = ( ((100*this.state.total)-(this.state.discounts*this.state.total))/100 );
 
   this.setState({total:newTotal});
 
@@ -55,7 +56,7 @@ this.change(e);
 var oldtotal = this.state.total;
 
 
-this.setState({total:(oldtotal*1) + (e.target.value*1)});
+this.setState({total:(oldtotal*1) + (this.state.shipping*1)});
 
 }
 createAndDownloadPdf = e => {
