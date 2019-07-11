@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import {saveAs} from 'file-saver';
+
 class Form extends React.Component{
 state={
     invoiceId: '',
@@ -114,7 +115,7 @@ render(){
             </div>
         <div className="col-12">
         <div>
-                <table className="table table-striped table-bordered table-hover">
+        <table className="table table-striped table-bordered table-hover">
                     <thead className="thead-dark">
                         <tr>
                             <th scope="col">Item-Id</th>
@@ -133,9 +134,8 @@ render(){
                         <td><input type="number" className="form-control" name="amount" placeholder="amount" value = {this.state.amount} onChange={e => this.newchange(e)}/></td>
                         </tr>
                     </tbody>
-                    
+                    <button className="btn btn-primary" ><i className="fa fa-add" />Add Items</button>
                 </table>
-                
             </div>
         </div>
 
@@ -158,7 +158,7 @@ render(){
             <input type="number" name="total" className="form-control" placeholder="total" value = {this.state.total} onChange={e => this.change(e)}/>
           </div>
           <div className="form-group">
-          <button className="btn btn-primary" onClick={e=> this.createAndDownloadPdf(e)}><i className="fa fa-database" />Create Doc</button>
+          <button className="btn btn-primary" onClick={e=> this.createAndDownloadPdf(e)}><i className="fa fa-database" />Create Invoice</button>
         </div>
         </div>
        
