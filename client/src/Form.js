@@ -20,6 +20,7 @@ state={
     shipping: '',
     total: '',
     
+
    
 }
 change = e => {
@@ -72,7 +73,20 @@ createAndDownloadPdf = e => {
     }))
     )
 }
-
+addRow = e =>{
+  e.preventDefault();
+  var x=document.getElementById('tbody').insertRow(0);
+  var id=x.insertCell(0);
+  var type=x.insertCell(1);
+  var quantity=x.insertCell(2);
+  var rate=x.insertCell(3);
+  var amount=x.insertCell(4);
+  id.innerHTML = `<input type="number" class="form-control" name="itemNumber" placeholder="Item-Id" />`;
+  type.innerHTML = `<input type="number" class="form-control" name="type" placeholder="type" />`;
+  quantity.innerHTML = `<input type="number" class="form-control" name="quantity" placeholder="quantity" />`;
+  rate.innerHTML = `<input type="number" class="form-control" name="rate" placeholder="rate" />`;
+  amount.innerHTML = `<input type="number" class="form-control" name="amount" placeholder="amount" />`;
+}
 render(){
     return (
         <div className="container" style={{marginTop: '10px', marginLeft: '30px', padding: '20px 0px 20px 20px'}}>
@@ -125,7 +139,7 @@ render(){
                             <th scope="col">Amount</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         <tr>
                         <td><input type="number" className="form-control" name="itemNumber" placeholder="Item-Id" value = {this.state.itemNumber} onChange={e => this.change(e)} /></td>
                         <td><input type="text" className="form-control" name="type" placeholder="type" value = {this.state.type} onChange={e => this.change(e)}/></td>
@@ -134,7 +148,7 @@ render(){
                         <td><input type="number" className="form-control" name="amount" placeholder="amount" value = {this.state.amount} onChange={e => this.newchange(e)}/></td>
                         </tr>
                     </tbody>
-                    <button className="btn btn-primary" ><i className="fa fa-add" />Add Items</button>
+                    <button className="btn btn-primary" onClick={e => this.addRow(e)} ><i className="fa fa-add" />Add Items</button>
                 </table>
             </div>
         </div>
