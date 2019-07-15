@@ -41,13 +41,11 @@ newchange = e=> {
   this.change(e)
   
 }
+
 addDiscounts = e=> {
   this.change(e);
-  var total  = this.state.total;
-  
-
-  this.setState({total:( ((100*total)-(this.state.discount*total))/100 )});
-
+  var total = this.state.total;
+  this.setState({total:  ( ((100*total)-(this.state.discount*total))/100 )});
 }
 addTax = e=> {
   this.change(e);
@@ -168,11 +166,11 @@ render(){
           </div>
           <div className="form-group">
             <label>Shipping</label>
-            <input type="number" className="form-control" name="shipping" placeholder="shipping" value = {this.state.shipping} onChange={e => this.change(e)} onBlur={e => this.addShipping(e)}/>
+            <input type="number" className="form-control" name="shipping" placeholder="Shipping" value = {this.state.shipping} onChange={e => this.change(e)} onBlur={e => this.addShipping(e)}/>
           </div>
           <div className="form-group">
             <label>Total</label>
-            <input type="number" name="total" className="form-control" placeholder="total" value = {this.state.total} onChange={e => this.change(e)}/>
+            <input type="number" name="total" className="form-control" placeholder="Total" value = {this.state.total} onChange={e => this.change(e)}/>
           </div>
           <div className="form-group">
           <button className="btn btn-primary" onClick={e=> this.createAndDownloadPdf(e)}><i className="fa fa-database" />Generate Invoice</button>

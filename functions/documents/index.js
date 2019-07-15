@@ -1,6 +1,6 @@
 
 
-module.exports = ({invoiceId,billFrom,billTo,date,dueDate,subTotal,itemNumber,type,quantity,rate,amount,discounts,tax,shipping,total,}) => {
+module.exports = ({invoiceId,billFrom,billTo,date,dueDate,subTotal,itemNumber,type,quantity,rate,amount,discount,tax,shipping,total,}) => {
 
     return `<html lang="en">
     <head>
@@ -193,7 +193,7 @@ module.exports = ({invoiceId,billFrom,billTo,date,dueDate,subTotal,itemNumber,ty
             </tr>
             <tr>
               <td colspan="4">Discount %</td>
-              <td class="total">${discounts}</td>
+              <td class="total">${discount}</td>
             </tr>
             <tr>
               <td colspan="4">Shipping</td>
