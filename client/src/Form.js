@@ -15,7 +15,7 @@ state={
     quantity:'',
     rate: '',
     amount: '',
-    discounts: '',
+    discount: '',
     tax: '',
     shipping: '',
     total: '',
@@ -43,9 +43,10 @@ newchange = e=> {
 }
 addDiscounts = e=> {
   this.change(e);
-  var newTotal = ( ((100*this.state.total)-(this.state.discounts*this.state.total))/100 );
+  var total  = this.state.total;
+  
 
-  this.setState({total:newTotal});
+  this.setState({total:( ((100*total)-(this.state.discount*total))/100 )});
 
 }
 addTax = e=> {
@@ -159,8 +160,7 @@ render(){
             <div className="col-6 offset-md-6">
           <div className="form-group">
             <label>Discount %</label>
-            <input type="number" className="form-control" name="Discount" placeholder="discounts" 
-                value = {this.state.discounts} onChange={e => this.addDiscounts(e)}/>
+            <input type="number" className="form-control" name="discount" placeholder="Discount" value = {this.state.discount}   onChange={e => this.change(e)} onBlur={e => this.addDiscounts(e)}/>
           </div>
           <div className="form-group">
             <label>Tax %</label>
