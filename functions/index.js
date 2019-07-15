@@ -1,21 +1,21 @@
-require('./models/db');
-
-const mongoose = require("mongoose");
+const functions = require('firebase-functions');
 const express = require("express");
 const bodyParser = require("body-parser");
 const pdf = require('html-pdf');
 const cors = require('cors');
-const invoiceController = require('./controllers/invoiceController');
-const pdfTemplate = require('./documents');
-
-
-const API_PORT = 5000;
 const app= express();
-const router = express.Router();
+const pdfTemplate = require('./documents');
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+
+
 
 // POST route for pdf generation
 app.post('/create-pdf',(req,res)=> {
@@ -31,6 +31,6 @@ app.post('/create-pdf',(req,res)=> {
 app.get('/fetch-pdf', (req,res)=>{
     res.sendFile(`${__dirname}/invoice.pdf`);
 })
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
 
-app.use('/invoice',invoiceController);
+
+ exports.app = functions.https.onRequest(app);
