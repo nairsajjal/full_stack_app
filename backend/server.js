@@ -1,11 +1,11 @@
-require('./models/db');
 
-const mongoose = require("mongoose");
+
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const pdf = require('html-pdf');
 const cors = require('cors');
-const invoiceController = require('./controllers/invoiceController');
+
 const pdfTemplate = require('./documents');
 
 
@@ -31,6 +31,7 @@ app.post('/create-pdf',(req,res)=> {
 app.get('/fetch-pdf', (req,res)=>{
     res.sendFile(`${__dirname}/invoice.pdf`);
 })
+
+
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
 
-app.use('/invoice',invoiceController);
